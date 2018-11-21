@@ -3,9 +3,9 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int size;
+class ArrayStorage {
+    private Resume[] storage = new Resume[10000];
+    private int size;
 
     void clear() {
         Arrays.fill(storage, null);
@@ -26,7 +26,7 @@ public class ArrayStorage {
     Resume get(String uuid) {
         if (uuid.contains("uuid")) {
             for (int i = 0; i < 10000; i++) {
-                if (storage[i].uuid == uuid) {
+                if (storage[i].uuid.equals(uuid)) {
                     return storage[i];
                 }
             }
@@ -38,7 +38,7 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < 10000; i++) {
             if (storage[i] != null) {
-                if (storage[i].uuid == uuid) {
+                if (storage[i].uuid.equals(uuid)) {
                     storage[i] = null;
 
                     for (int j = i; j < size;) {
@@ -67,9 +67,7 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         Resume[] storage = new Resume[size];
-        for (int i = 0; i < size; i++) {
-            storage[i] = this.storage[i];
-        }
+        System.arraycopy(this.storage, 0, storage, 0, size);
         return storage ;
     }
 
