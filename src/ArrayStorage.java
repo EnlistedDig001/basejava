@@ -17,26 +17,21 @@ class ArrayStorage {
         while (storage[i] != null) {
             i++;
         }
-
         storage[i] = r;
-
         size++;
     }
 
     Resume get(String uuid) {
-        if (uuid.contains("uuid")) {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < size; i++) {
                 if (storage[i].uuid.equals(uuid)) {
                     return storage[i];
                 }
             }
-        }
         return null;
-
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i] != null) {
                 if (storage[i].uuid.equals(uuid)) {
                     storage[i] = null;
