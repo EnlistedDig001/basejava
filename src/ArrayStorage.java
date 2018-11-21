@@ -13,11 +13,13 @@ class ArrayStorage {
     }
 
     void save(Resume r) {
-        int i = 0;
-        while (storage[i] != null) {
-            i++;
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(r.uuid)) {
+                System.out.println("Already exists");
+            }
         }
-        storage[i] = r;
+
+        storage[size] = r;
         size++;
     }
 
@@ -39,6 +41,7 @@ class ArrayStorage {
                     for (int j = i; j < size;) {
                         storage[j] = storage[++j];
                     }
+                    size--;
                 }
             }
         }
