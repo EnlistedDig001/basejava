@@ -1,14 +1,15 @@
 import java.util.Arrays;
-import java.util.WeakHashMap;
 
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int size;
 
     void clear() {
         Arrays.fill(storage, null);
+        size = 0;
     }
 
     void save(Resume r) {
@@ -18,50 +19,58 @@ public class ArrayStorage {
         }
 
         storage[i] = r;
+
+        size++;
     }
 
     Resume get(String uuid) {
         if (uuid.contains("uuid")) {
-            int id = (Integer.parseInt(uuid.replaceAll("uuid", "")))-1;
-            return storage[id];
-        } else {
-            return null;
+            for (int i = 0; i < 10000; i++) {
+                if (storage[i].uuid == uuid) {
+                    return storage[i];
+                }
+            }
         }
+        return null;
+
     }
 
     void delete(String uuid) {
-        int i = 0;
-        while (storage[i].uuid != uuid) {
-            i++;
+        for (int i = 0; i < 10000; i++) {
+            if (storage[i] != null) {
+                if (storage[i].uuid == uuid) {
+                    storage[i] = null;
 
-            if (i > 10000) {
-                break;
+                    for (int j = i; j < size;) {
+                        storage[j] = storage[++j];
+                    }
+                }
             }
         }
-
-        storage[i] = null;
     }
 
     int size() {
-        int n = 0;
-        for (int i = 0; i < 10000; i++) {
-            if (storage[i] == null) {
-                n = i;
-                break;
+        if (size == 0) {
+            for (int i = 0; i < 10000; i++) {
+                if (storage[i] == null) {
+                    size = i;
+                    break;
+                }
             }
         }
-        return n;
+
+        return size;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] storage = new Resume[size()];
-        for (int i = 0; i < size(); i++) {
-            this.storage[i] = storage[i];
+        Resume[] storage = new Resume[size];
+        for (int i = 0; i < size; i++) {
+            storage[i] = this.storage[i];
         }
-        return this.storage ;
+        return storage ;
     }
 
 
