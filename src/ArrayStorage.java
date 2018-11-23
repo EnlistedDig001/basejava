@@ -41,15 +41,6 @@ class ArrayStorage {
     }
 
     int size() {
-        if (size == 0) {
-            for (int i = 0; i < 10000; i++) {
-                if (storage[i] == null) {
-                    size = i;
-                    break;
-                }
-            }
-        }
-
         return size;
     }
 
