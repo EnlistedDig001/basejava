@@ -13,19 +13,8 @@ class ArrayStorage {
     }
 
     void save(Resume r) {
-        boolean isDuplicate = false;
-
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(r.uuid)) {
-                isDuplicate = true;
-                System.out.println("Already exists");
-            }
-        }
-        if (!isDuplicate) {
-            storage[size] = r;
-            size++;
-        }
-
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
