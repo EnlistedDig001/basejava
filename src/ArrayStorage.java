@@ -9,7 +9,7 @@ public class ArrayStorage {
     private int size;
 
     void clear() {
-        Arrays.fill(storage, 0, size--, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
@@ -43,6 +43,7 @@ public class ArrayStorage {
             storage[resumeNumInStorage] = null;
             size--;
             storage[resumeNumInStorage] = storage[size];
+            storage[size] = null;
         } else {
             System.out.println("Такого резюме нет.");
         }
@@ -59,7 +60,6 @@ public class ArrayStorage {
         } else {
             System.out.println("Такого резюме нет.");
         }
-
     }
 
     /**
@@ -79,6 +79,4 @@ public class ArrayStorage {
         }
         return -1;
     }
-
-
 }
