@@ -18,9 +18,10 @@ class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-
+        for (int i = 0; i <= size; i++) {
+            if (i == size) {
+                System.out.println("Такого резюме нет.");
+            } else if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
             }
         }
@@ -28,8 +29,10 @@ class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+        for (int i = 0; i <= size; i++) {
+            if (i == size) {
+                System.out.println("Такого резюме нет.");
+            } else if (storage[i].uuid.equals(uuid)) {
                 storage[i] = null;
 
                 for (int j = i; j < size;) {
@@ -44,10 +47,14 @@ class ArrayStorage {
         return size;
     }
 
-    void update(Resume resume) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(resume.uuid)) {
-                storage[i] = resume;
+    void update(Resume oldResume, Resume newResume) {
+        for (int i = 0; i <= size; i++) {
+            if (i == size) {
+                System.out.println("Такого резюме нет.");
+            } else if (storage[i].uuid.equals(oldResume.uuid)) {
+                storage[i] = newResume;
+                System.out.println("Обновлено.");
+                break;
             }
         }
     }
