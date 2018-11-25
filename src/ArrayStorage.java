@@ -14,7 +14,7 @@ public class ArrayStorage {
     }
 
     void save(Resume resume) {
-        int resumeNumInStorage = resumeNumInStorage(resume.uuid);
+        int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
         if (size < MAX_SIZE) {
             if (resumeNumInStorage == -1) {
                 storage[size] = resume;
@@ -53,7 +53,7 @@ public class ArrayStorage {
     }
 
     void update(Resume resume) {
-        int resumeNumInStorage = resumeNumInStorage(resume.uuid);
+        int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
         if (resumeNumInStorage != -1) {
             storage[resumeNumInStorage] = resume;
         } else {
@@ -73,7 +73,7 @@ public class ArrayStorage {
 
     private int resumeNumInStorage(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }

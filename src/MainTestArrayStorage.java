@@ -6,25 +6,25 @@ public class MainTestArrayStorage {
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
-        r1.uuid = "uuid1";
+        r1.setUuid("uuid1");
         Resume r2 = new Resume();
-        r2.uuid = "uuid2";
+        r2.setUuid("uuid2");
         Resume r3 = new Resume();
-        r3.uuid = "uuid3";
+        r3.setUuid("uuid3");
         Resume r5 = new Resume();
-        r5.uuid = "uuid5";
+        r5.setUuid("uuid5");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r3);
         ARRAY_STORAGE.save(r5);
 
-        System.out.println("Get r3: " + ARRAY_STORAGE.get(r3.uuid));
-        System.out.println("Get r5: " + ARRAY_STORAGE.get(r5.uuid));
+        System.out.println("Get r3: " + ARRAY_STORAGE.get(r3.getUuid()));
+        System.out.println("Get r5: " + ARRAY_STORAGE.get(r5.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
         printAll();
 
         System.out.println("Delete r3");
-        ARRAY_STORAGE.delete(r3.uuid);
+        ARRAY_STORAGE.delete(r3.getUuid());
         printAll();
 
         System.out.println("Update r5");
