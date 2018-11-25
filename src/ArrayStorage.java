@@ -52,8 +52,8 @@ public class ArrayStorage {
         return size;
     }
 
-    void update(Resume oldResume, Resume newResume) {
-        int resumeNumInStorage = resumeNumInStorage(oldResume.uuid);
+    void update(Resume resume) {
+        int resumeNumInStorage = resumeNumInStorage(resume.uuid);
         if (resumeNumInStorage != -1) {
             storage[resumeNumInStorage] = newResume;
             System.out.println("Обновлено.");
