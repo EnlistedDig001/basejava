@@ -12,17 +12,24 @@ public class MainArray {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
+        Resume newR;
         while (true) {
-            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | update uuid1 uuid2 | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
-            if (params.length < 1 || params.length > 2) {
+            if (params.length < 1 || params.length > 3) {
                 System.out.println("Неверная команда.");
                 continue;
             }
             String uuid = null;
+            String newUuid = null;
             if (params.length == 2) {
                 uuid = params[1].intern();
             }
+            if (params.length == 3) {
+                uuid = params[1].intern();
+                newUuid = params[2].intern();
+            }
+
             switch (params[0]) {
                 case "list":
                     printAll();
@@ -52,7 +59,10 @@ public class MainArray {
                 case "update":
                     r = new Resume();
                     r.uuid = uuid;
-                    ARRAY_STORAGE.update(r);
+                    newR = new Resume();
+                    newR.uuid = newUuid;
+
+                    ARRAY_STORAGE.update(r, newR);
                     printAll();
                     break;
                 default:
