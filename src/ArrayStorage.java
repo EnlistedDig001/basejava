@@ -8,15 +8,6 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[MAX_SIZE];
     private int size;
 
-    private int resumeNumInStorage(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     void clear() {
         Arrays.fill(storage, null);
         size = 0;
@@ -38,7 +29,7 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         int resumeNumInStorage = resumeNumInStorage(uuid);
-        if (resumeNumInStorage != -1){
+        if (resumeNumInStorage != -1) {
             return storage[resumeNumInStorage];
         } else {
             System.out.println("Такого резюме нет.");
