@@ -41,10 +41,8 @@ public class ArrayStorage {
         int resumeNumInStorage = resumeNumInStorage(uuid);
         if (resumeNumInStorage != -1) {
             storage[resumeNumInStorage] = null;
-            for (int j = resumeNumInStorage; j < size;) {
-                storage[j] = storage[++j];
-            }
             size--;
+            storage[resumeNumInStorage] = storage[size];
         } else {
             System.out.println("Такого резюме нет.");
         }
