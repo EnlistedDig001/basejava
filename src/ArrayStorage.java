@@ -3,8 +3,9 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+public class ArrayStorage {
+    private int MAX_SIZE = 10_000;
+    private Resume[] storage = new Resume[MAX_SIZE];
     private int size;
 
     private int resumeNumInStorage(String uuid) {
