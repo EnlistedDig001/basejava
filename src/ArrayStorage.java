@@ -44,6 +44,14 @@ class ArrayStorage {
         return size;
     }
 
+    void update(Resume resume) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(resume.uuid)) {
+                storage[i] = resume;
+            }
+        }
+    }
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */

@@ -49,6 +49,12 @@ public class MainArray {
                     break;
                 case "exit":
                     return;
+                case "update":
+                    r = new Resume();
+                    r.uuid = uuid;
+                    ARRAY_STORAGE.update(r);
+                    printAll();
+                    break;
                 default:
                     System.out.println("Неверная команда.");
                     break;
@@ -56,7 +62,7 @@ public class MainArray {
         }
     }
 
-    static void printAll() {
+    private static void printAll() {
         Resume[] all = ARRAY_STORAGE.getAll();
         System.out.println("----------------------------");
         if (all.length == 0) {
