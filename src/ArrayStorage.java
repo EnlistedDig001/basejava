@@ -7,55 +7,51 @@ class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size;
 
+    private Integer resumeNumInStorage(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     void clear() {
         Arrays.fill(storage, null);
         size = 0;
     }
 
     void save(Resume r) {
-        boolean isDuplicate = false;
-        if (size < 10000) {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(r.uuid)) {
-                    isDuplicate = true;
-                    System.out.println("Уже есть такое резюме.");
-                }
-            }
-
-            if (!isDuplicate) {
+       if (size < 10000) {
+            if (resumeNumInStorage(r.uuid) == null) {
                 storage[size] = r;
                 size++;
+            } else {
+                System.out.println("Уже есть такое резюме.");
             }
         } else {
             System.out.println("Хранилище резюме заполнено.");
         }
-
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i <= size; i++) {
-            if (i == size) {
-                System.out.println("Такого резюме нет.");
-            } else if (storage[i].uuid.equals(uuid)) {
-                return storage[i];
-            }
+        if (resumeNumInStorage(uuid) != null){
+            return storage[resumeNumInStorage(uuid)];
+        } else {
+            System.out.println("Такого резюме нет.");
+            return null;
         }
-        return null;
     }
 
     void delete(String uuid) {
-        for (int i = 0; i <= size; i++) {
-            if (i == size) {
-                System.out.println("Такого резюме нет.");
-            } else if (storage[i].uuid.equals(uuid)) {
-                storage[i] = null;
-
-                for (int j = i; j < size;) {
-                    storage[j] = storage[++j];
-                }
-                size--;
-                break;
+        if (resumeNumInStorage(uuid) != null) {
+            storage[resumeNumInStorage(uuid)] = null;
+            for (int j = resumeNumInStorage(uuid); j < size;) {
+                storage[j] = storage[++j];
             }
+            size--;
+        } else {
+            System.out.println("Такого резюме нет.");
         }
     }
 
@@ -64,15 +60,13 @@ class ArrayStorage {
     }
 
     void update(Resume oldResume, Resume newResume) {
-        for (int i = 0; i <= size; i++) {
-            if (i == size) {
-                System.out.println("Такого резюме нет.");
-            } else if (storage[i].uuid.equals(oldResume.uuid)) {
-                storage[i] = newResume;
-                System.out.println("Обновлено.");
-                break;
-            }
+        if (resumeNumInStorage(oldResume.uuid) != null) {
+            storage[resumeNumInStorage(oldResume.uuid)] = newResume;
+            System.out.println("Обновлено.");
+        } else {
+            System.out.println("Такого резюме нет.");
         }
+
     }
 
     /**
