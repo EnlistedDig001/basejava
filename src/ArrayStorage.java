@@ -13,8 +13,23 @@ class ArrayStorage {
     }
 
     void save(Resume r) {
-        storage[size] = r;
-        size++;
+        boolean isDuplicate = false;
+        if (size < 10000) {
+            for (int i = 0; i < size; i++) {
+                if (storage[i].uuid.equals(r.uuid)) {
+                    isDuplicate = true;
+                    System.out.println("Уже есть такое резюме.");
+                }
+            }
+
+            if (!isDuplicate) {
+                storage[size] = r;
+                size++;
+            }
+        } else {
+            System.out.println("Хранилище резюме заполнено.");
+        }
+
     }
 
     Resume get(String uuid) {
