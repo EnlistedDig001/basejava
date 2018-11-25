@@ -13,11 +13,11 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void save(Resume r) {
-        int resumeNumInStorage = resumeNumInStorage(r.uuid);
-        if (size < 10000) {
+    void save(Resume resume) {
+        int resumeNumInStorage = resumeNumInStorage(resume.uuid);
+        if (size < MAX_SIZE) {
             if (resumeNumInStorage == -1) {
-                storage[size] = r;
+                storage[size] = resume;
                 size++;
             } else {
                 System.out.println("Уже есть такое резюме.");
@@ -69,9 +69,9 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] storage = new Resume[size];
-        System.arraycopy(this.storage, 0, storage, 0, size);
-        return storage ;
+        Resume[] storageCopy = new Resume[size];
+        System.arraycopy(storage, 0, storageCopy, 0, size);
+        return storageCopy;
     }
 
 
