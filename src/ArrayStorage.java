@@ -39,6 +39,7 @@ class ArrayStorage {
                     storage[j] = storage[++j];
                 }
                 size--;
+                break;
             }
         }
     }
