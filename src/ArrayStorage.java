@@ -7,13 +7,13 @@ class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size;
 
-    private Integer resumeNumInStorage(String uuid) {
+    private int resumeNumInStorage(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return i;
             }
         }
-        return null;
+        return -1;
     }
 
     void clear() {
@@ -22,8 +22,9 @@ class ArrayStorage {
     }
 
     void save(Resume r) {
-       if (size < 10000) {
-            if (resumeNumInStorage(r.uuid) == null) {
+        int resumeNumInStorage = resumeNumInStorage(r.uuid);
+        if (size < 10000) {
+            if (resumeNumInStorage == -1) {
                 storage[size] = r;
                 size++;
             } else {
@@ -35,8 +36,9 @@ class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        if (resumeNumInStorage(uuid) != null){
-            return storage[resumeNumInStorage(uuid)];
+        int resumeNumInStorage = resumeNumInStorage(uuid);
+        if (resumeNumInStorage != -1){
+            return storage[resumeNumInStorage];
         } else {
             System.out.println("Такого резюме нет.");
             return null;
@@ -44,9 +46,10 @@ class ArrayStorage {
     }
 
     void delete(String uuid) {
-        if (resumeNumInStorage(uuid) != null) {
-            storage[resumeNumInStorage(uuid)] = null;
-            for (int j = resumeNumInStorage(uuid); j < size;) {
+        int resumeNumInStorage = resumeNumInStorage(uuid);
+        if (resumeNumInStorage != -1) {
+            storage[resumeNumInStorage] = null;
+            for (int j = resumeNumInStorage; j < size;) {
                 storage[j] = storage[++j];
             }
             size--;
@@ -60,8 +63,9 @@ class ArrayStorage {
     }
 
     void update(Resume oldResume, Resume newResume) {
-        if (resumeNumInStorage(oldResume.uuid) != null) {
-            storage[resumeNumInStorage(oldResume.uuid)] = newResume;
+        int resumeNumInStorage = resumeNumInStorage(oldResume.uuid);
+        if (resumeNumInStorage != -1) {
+            storage[resumeNumInStorage] = newResume;
             System.out.println("Обновлено.");
         } else {
             System.out.println("Такого резюме нет.");
