@@ -55,8 +55,7 @@ public class ArrayStorage {
     void update(Resume resume) {
         int resumeNumInStorage = resumeNumInStorage(resume.uuid);
         if (resumeNumInStorage != -1) {
-            storage[resumeNumInStorage] = newResume;
-            System.out.println("Обновлено.");
+            storage[resumeNumInStorage] = resume;
         } else {
             System.out.println("Такого резюме нет.");
         }
