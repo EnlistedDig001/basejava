@@ -50,12 +50,6 @@ public class MainArray {
                 case "get":
                     System.out.println(ARRAY_STORAGE.get(uuid));
                     break;
-                case "clear":
-                    ARRAY_STORAGE.clear();
-                    printAll();
-                    break;
-                case "exit":
-                    return;
                 case "update":
                     r = new Resume();
                     r.uuid = uuid;
@@ -65,6 +59,13 @@ public class MainArray {
                     ARRAY_STORAGE.update(r, newR);
                     printAll();
                     break;
+                case "clear":
+                    ARRAY_STORAGE.clear();
+                    printAll();
+                    break;
+                case "exit":
+                    return;
+
                 default:
                     System.out.println("Неверная команда.");
                     break;
