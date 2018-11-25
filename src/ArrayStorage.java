@@ -74,5 +74,14 @@ public class ArrayStorage {
         return storageCopy;
     }
 
+    private int resumeNumInStorage(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
 }
