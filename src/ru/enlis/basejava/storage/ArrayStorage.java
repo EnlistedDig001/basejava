@@ -7,10 +7,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private int MAX_SIZE = 10_000;
-    private Resume[] storage = new Resume[MAX_SIZE];
-    private int size;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -18,9 +15,9 @@ public class ArrayStorage {
     }
 
     public void save(Resume resume) {
-        int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
+        int indexInStorage = indexInStorage(resume.getUuid());
         if (size < MAX_SIZE) {
-            if (resumeNumInStorage == -1) {
+            if (indexInStorage == -1) {
                 storage[size] = resume;
                 size++;
             } else {
@@ -31,36 +28,22 @@ public class ArrayStorage {
         }
     }
 
-    public Resume get(String uuid) {
-        int resumeNumInStorage = resumeNumInStorage(uuid);
-        if (resumeNumInStorage != -1) {
-            return storage[resumeNumInStorage];
-        } else {
-            System.out.println("Такого резюме нет.");
-            return null;
-        }
-    }
-
     public void delete(String uuid) {
-        int resumeNumInStorage = resumeNumInStorage(uuid);
-        if (resumeNumInStorage != -1) {
-            storage[resumeNumInStorage] = null;
+        int indexInStorage = indexInStorage(uuid);
+        if (indexInStorage != -1) {
+            storage[indexInStorage] = null;
             size--;
-            storage[resumeNumInStorage] = storage[size];
+            storage[indexInStorage] = storage[size];
             storage[size] = null;
         } else {
             System.out.println("Такого резюме нет.");
         }
     }
 
-    public int size() {
-        return size;
-    }
-
     public void update(Resume resume) {
-        int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
-        if (resumeNumInStorage != -1) {
-            storage[resumeNumInStorage] = resume;
+        int indexInStorage = indexInStorage(resume.getUuid());
+        if (indexInStorage != -1) {
+            storage[indexInStorage] = resume;
         } else {
             System.out.println("Такого резюме нет.");
         }
@@ -75,7 +58,7 @@ public class ArrayStorage {
         return storageCopy;
     }
 
-    private int resumeNumInStorage(String uuid) {
+    protected int indexInStorage(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
