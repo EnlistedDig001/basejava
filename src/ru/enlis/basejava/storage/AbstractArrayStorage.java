@@ -5,7 +5,7 @@ import ru.enlis.basejava.model.Resume;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage {
+public abstract class AbstractArrayStorage implements Storage {
     protected int MAX_SIZE = 10_000;
     protected Resume[] storage = new Resume[MAX_SIZE];
     protected int size = 0;
