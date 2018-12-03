@@ -1,3 +1,5 @@
+package ru.enlis.basejava.model;
+
 /**
  * Initial resume class
  */

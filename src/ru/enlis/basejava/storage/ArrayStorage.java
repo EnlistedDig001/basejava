@@ -1,3 +1,7 @@
+package ru.enlis.basejava.storage;
+
+import ru.enlis.basejava.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -8,12 +12,12 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[MAX_SIZE];
     private int size;
 
-    void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    void save(Resume resume) {
+    public void save(Resume resume) {
         int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
         if (size < MAX_SIZE) {
             if (resumeNumInStorage == -1) {
@@ -27,7 +31,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int resumeNumInStorage = resumeNumInStorage(uuid);
         if (resumeNumInStorage != -1) {
             return storage[resumeNumInStorage];
@@ -37,7 +41,7 @@ public class ArrayStorage {
         }
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int resumeNumInStorage = resumeNumInStorage(uuid);
         if (resumeNumInStorage != -1) {
             storage[resumeNumInStorage] = null;
@@ -49,11 +53,11 @@ public class ArrayStorage {
         }
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 
-    void update(Resume resume) {
+    public void update(Resume resume) {
         int resumeNumInStorage = resumeNumInStorage(resume.getUuid());
         if (resumeNumInStorage != -1) {
             storage[resumeNumInStorage] = resume;
@@ -65,7 +69,7 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] storageCopy = new Resume[size];
         System.arraycopy(storage, 0, storageCopy, 0, size);
         return storageCopy;

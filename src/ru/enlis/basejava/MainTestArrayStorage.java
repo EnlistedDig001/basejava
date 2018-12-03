@@ -1,5 +1,10 @@
+package ru.enlis.basejava;
+
+import ru.enlis.basejava.model.Resume;
+import ru.enlis.basejava.storage.ArrayStorage;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your ru.enlis.basejava.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
