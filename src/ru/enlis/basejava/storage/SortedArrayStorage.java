@@ -10,28 +10,34 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void clear() {
+    public void update(Resume resume) {
 
     }
 
     @Override
-    public void update(Resume r) {
+    public void save(Resume resume) {
+        if (size == 0) {
+            storage[0] = resume;
+            size++;
+        } else if (size == MAX_SIZE) {
+            System.out.println("Хранилище резюме заполнено.");
+        } else {
+            int i = size;
+            while (i > 0 && Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[--i].getUuid())) {
+            }
 
-    }
+            for (int j = size; j > i; j--) {
+                storage[j] = storage[--j];
+            }
 
-    @Override
-    public void save(Resume r) {
-
+            storage[i] = resume;
+            size++;
+        }
     }
 
     @Override
     public void delete(String uuid) {
 
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
     }
 
     @Override
