@@ -2,15 +2,17 @@ package ru.enlis.basejava;
 
 import ru.enlis.basejava.model.Resume;
 import ru.enlis.basejava.storage.ArrayStorage;
+import ru.enlis.basejava.storage.SortedArrayStorage;
 
 /**
  * Test for your ru.enlis.basejava.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final SortedArrayStorage SORTED_ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
-        Resume r1 = new Resume();
+        /*Resume r1 = new Resume();
         r1.setUuid("uuid1");
         Resume r2 = new Resume();
         r2.setUuid("uuid2");
@@ -43,11 +45,12 @@ public class MainTestArrayStorage {
         System.out.println("Save r2");
         ARRAY_STORAGE.save(r2);
         printAll();
+
     }
 
     private static void printAll() {
         System.out.println("\nGet All");
-        for (Resume r : ARRAY_STORAGE.getAll()) {
+        for (Resume r : SORTED_ARRAY_STORAGE.getAll()) {
             System.out.println(r);
         }
     }

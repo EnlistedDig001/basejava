@@ -2,6 +2,8 @@ package ru.enlis.basejava.storage;
 
 import ru.enlis.basejava.model.Resume;
 
+import java.util.Arrays;
+
 /**
  * Array based storage for Resumes
  */
@@ -14,6 +16,11 @@ public abstract class AbstractArrayStorage implements Storage {
         return size;
     }
 
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+    }
+
     public Resume get(String uuid) {
         int indexInStorage = indexInStorage(uuid);
         if (indexInStorage != -1) {
@@ -22,6 +29,12 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("Резюме " + uuid + " нет.");
             return null;
         }
+    }
+
+    public Resume[] getAll() {
+        Resume[] storageCopy = new Resume[size];
+        System.arraycopy(storage, 0, storageCopy, 0, size);
+        return storageCopy;
     }
 
     protected abstract int indexInStorage(String uuid);
