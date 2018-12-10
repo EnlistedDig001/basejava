@@ -22,12 +22,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         } else if (size == MAX_SIZE) {
             System.out.println("Хранилище резюме заполнено.");
         } else {
-            int i = size;
-            while (i > 0 && Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[--i].getUuid())) {
+            int i = 0;
+            while ((i < size) && (Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[i].getUuid()))) {
+                i++;
             }
 
             for (int j = size; j > i; j--) {
                 storage[j] = storage[--j];
+                j++;
             }
 
             storage[i] = resume;

@@ -31,6 +31,15 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
+    public void update(Resume resume) {
+        int indexInStorage = indexInStorage(resume.getUuid());
+        if (indexInStorage > -1) {
+            storage[indexInStorage] = resume;
+        } else {
+            System.out.println("Резюме " + resume.getUuid() + " отсутствует.");
+        }
+    }
+
     public Resume[] getAll() {
         Resume[] storageCopy = new Resume[size];
         System.arraycopy(storage, 0, storageCopy, 0, size);

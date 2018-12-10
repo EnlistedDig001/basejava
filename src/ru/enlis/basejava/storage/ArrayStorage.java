@@ -33,14 +33,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    public void update(Resume resume) {
-        int indexInStorage = indexInStorage(resume.getUuid());
-        if (indexInStorage != -1) {
-            storage[indexInStorage] = resume;
-        } else {
-            System.out.println("Резюме " + resume.getUuid() + " отсутствует.");
-        }
-    }
 
     /**
      * @return array, contains only Resumes in storage (without null)
