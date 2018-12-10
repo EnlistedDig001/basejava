@@ -12,40 +12,30 @@ public class MainTestArrayStorage {
     private static final SortedArrayStorage SORTED_ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
-        /*Resume r1 = new Resume();
-        r1.setUuid("uuid1");
+        Resume r1 = new Resume();
+        r1.setUuid("5");
         Resume r2 = new Resume();
-        r2.setUuid("uuid2");
+        r2.setUuid("1");
         Resume r3 = new Resume();
-        r3.setUuid("uuid3");
+        r3.setUuid("2");
         Resume r5 = new Resume();
-        r5.setUuid("uuid5");
+        r5.setUuid("0");
 
-        ARRAY_STORAGE.save(r1);
-        ARRAY_STORAGE.save(r3);
-        ARRAY_STORAGE.save(r5);
-
-        System.out.println("Get r3: " + ARRAY_STORAGE.get(r3.getUuid()));
-        System.out.println("Get r5: " + ARRAY_STORAGE.get(r5.getUuid()));
-        System.out.println("Size: " + ARRAY_STORAGE.size());
+        System.out.println("Save 5");
+        SORTED_ARRAY_STORAGE.save(r1);
         printAll();
 
-        System.out.println("Delete r3");
-        ARRAY_STORAGE.delete(r3.getUuid());
+        System.out.println("Save 1");
+        SORTED_ARRAY_STORAGE.save(r2);
         printAll();
 
-        System.out.println("Update r5");
-        ARRAY_STORAGE.update(r5);
+        System.out.println("Save 2");
+        SORTED_ARRAY_STORAGE.save(r3);
         printAll();
 
-        System.out.println("Clear");
-        ARRAY_STORAGE.clear();
+        System.out.println("Save 0");
+        SORTED_ARRAY_STORAGE.save(r5);
         printAll();
-
-        System.out.println("Save r2");
-        ARRAY_STORAGE.save(r2);
-        printAll();
-
     }
 
     private static void printAll() {
