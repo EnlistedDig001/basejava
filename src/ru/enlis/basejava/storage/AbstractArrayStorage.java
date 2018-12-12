@@ -23,7 +23,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         int indexInStorage = indexInStorage(uuid);
-        if (indexInStorage != -1) {
+        if (indexInStorage > -1) {
             return storage[indexInStorage];
         } else {
             System.out.println("Резюме " + uuid + " нет.");

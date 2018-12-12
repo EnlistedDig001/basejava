@@ -16,6 +16,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             size++;
         } else if (size == MAX_SIZE) {
             System.out.println("Хранилище резюме заполнено.");
+        } else if (indexInStorage(resume.getUuid()) < 0) {
+            System.out.println("Резюме " + resume.getUuid() + " уже существует.");
         } else {
             int i = 0;
             while ((i < size) && (Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[i].getUuid()))) {
@@ -40,7 +42,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             }
             size--;
         } else {
-            System.out.println("Такого резюме нет.");
+            System.out.println("Резюме " + uuid + " нет.");
         }
     }
 
