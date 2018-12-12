@@ -5,18 +5,17 @@ import ru.enlis.basejava.model.Resume;
 import java.util.Arrays;
 
 /**
- * Array based storage for Resumes
+ * Sorted array based storage for Resumes
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    @Override
     public void save(Resume resume) {
         if (size == 0) {
             storage[0] = resume;
             size++;
         } else if (size == MAX_SIZE) {
             System.out.println("Хранилище резюме заполнено.");
-        } else if (indexInStorage(resume.getUuid()) < 0) {
+        } else if (indexInStorage(resume.getUuid()) >= 0) {
             System.out.println("Резюме " + resume.getUuid() + " уже существует.");
         } else {
             int i = 0;
@@ -46,8 +45,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
     }
 
-
-    @Override
     protected int indexInStorage(String uuid) {
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
