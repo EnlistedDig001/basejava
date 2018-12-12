@@ -10,11 +10,6 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void update(Resume resume) {
-
-    }
-
-    @Override
     public void save(Resume resume) {
         if (size == 0) {
             storage[0] = resume;
@@ -37,10 +32,18 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
     }
 
-    @Override
     public void delete(String uuid) {
-
+        int indexInStorage = indexInStorage(uuid);
+        if (indexInStorage >= 0) {
+            for (int i = size; i > 0; i--) {
+                storage[i] = storage[--i];
+            }
+            size--;
+        } else {
+            System.out.println("Такого резюме нет.");
+        }
     }
+
 
     @Override
     protected int indexInStorage(String uuid) {
