@@ -12,13 +12,32 @@ public abstract class AbstractArrayStorage implements Storage {
     protected Resume[] storage = new Resume[MAX_SIZE];
     protected int size = 0;
 
-    public int size() {
-        return size;
-    }
-
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
+    }
+
+    public void update(Resume resume) {
+        int indexInStorage = indexInStorage(resume.getUuid());
+        if (indexInStorage > -1) {
+            storage[indexInStorage] = resume;
+        } else {
+            System.out.println("Резюме " + resume.getUuid() + " отсутствует.");
+        }
+    }
+
+    public void save(Resume resume) {
+        if (size == 0) {
+            storage[0] = resume;
+            size++;
+        } else if (size == MAX_SIZE) {
+            System.out.println("Хранилище резюме заполнено.");
+        } else if (indexInStorage(resume.getUuid()) >= 0) {
+            System.out.println("Резюме " + resume.getUuid() + " уже существует.");
+        } else {
+            saveInOrder(resume);
+            size++;
+        }
     }
 
     public Resume get(String uuid) {
@@ -31,12 +50,13 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void update(Resume resume) {
-        int indexInStorage = indexInStorage(resume.getUuid());
+    public void delete(String uuid) {
+        int indexInStorage = indexInStorage(uuid);
         if (indexInStorage > -1) {
-            storage[indexInStorage] = resume;
+            deleteSavingOrder(uuid, indexInStorage);
+            size--;
         } else {
-            System.out.println("Резюме " + resume.getUuid() + " отсутствует.");
+            System.out.println("Резюме " + uuid + " нет.");
         }
     }
 
@@ -46,5 +66,13 @@ public abstract class AbstractArrayStorage implements Storage {
         return storageCopy;
     }
 
+    public int size() {
+        return size;
+    }
+
     protected abstract int indexInStorage(String uuid);
+
+    protected abstract void saveInOrder(Resume resume);
+
+    protected abstract void deleteSavingOrder(String uuid, int indexInStorage);
 }

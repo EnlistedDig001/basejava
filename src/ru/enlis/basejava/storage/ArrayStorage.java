@@ -7,30 +7,14 @@ import ru.enlis.basejava.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void save(Resume resume) {
-        int indexInStorage = indexInStorage(resume.getUuid());
-        if (size < MAX_SIZE) {
-            if (indexInStorage == -1) {
-                storage[size] = resume;
-                size++;
-            } else {
-                System.out.println("Уже есть такое резюме.");
-            }
-        } else {
-            System.out.println("Хранилище резюме заполнено.");
-        }
+    protected void saveInOrder(Resume resume) {
+        storage[size] = resume;
     }
 
-    public void delete(String uuid) {
-        int indexInStorage = indexInStorage(uuid);
-        if (indexInStorage != -1) {
-            storage[indexInStorage] = null;
-            size--;
-            storage[indexInStorage] = storage[size];
-            storage[size] = null;
-        } else {
-            System.out.println("Такого резюме нет.");
-        }
+    protected void deleteSavingOrder(String uuid, int indexInStorage) {
+        storage[indexInStorage] = null;
+        storage[indexInStorage] = storage[size - 1];
+        storage[size - 1] = null;
     }
 
     protected int indexInStorage(String uuid) {

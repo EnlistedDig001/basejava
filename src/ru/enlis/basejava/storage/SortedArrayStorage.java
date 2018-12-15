@@ -9,39 +9,24 @@ import java.util.Arrays;
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    public void save(Resume resume) {
-        if (size == 0) {
-            storage[0] = resume;
-            size++;
-        } else if (size == MAX_SIZE) {
-            System.out.println("Хранилище резюме заполнено.");
-        } else if (indexInStorage(resume.getUuid()) >= 0) {
-            System.out.println("Резюме " + resume.getUuid() + " уже существует.");
-        } else {
-            int i = 0;
-            while ((i < size) && (Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[i].getUuid()))) {
-                i++;
-            }
-
-            for (int j = size; j > i; j--) {
-                storage[j] = storage[--j];
-                j++;
-            }
-
-            storage[i] = resume;
-            size++;
+    protected void saveInOrder(Resume resume) {
+        int i = 0;
+        while ((i < size) && (Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[i].getUuid()))) {
+            i++;
         }
+
+        for (int j = size; j > i; j--) {
+            storage[j] = storage[--j];
+            j++;
+        }
+
+        storage[i] = resume;
     }
 
-    public void delete(String uuid) {
-        int indexInStorage = indexInStorage(uuid);
-        if (indexInStorage >= 0) {
-            for (int i = size; i > 0; i--) {
-                storage[i] = storage[--i];
-            }
-            size--;
-        } else {
-            System.out.println("Резюме " + uuid + " нет.");
+    protected void deleteSavingOrder(String uuid, int indexInStorage) {
+        for (int i = indexInStorage; i < size; i++) {
+            storage[i] = storage[++i];
+            i--;
         }
     }
 
