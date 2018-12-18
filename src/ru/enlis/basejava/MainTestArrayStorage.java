@@ -3,13 +3,14 @@ package ru.enlis.basejava;
 import ru.enlis.basejava.model.Resume;
 import ru.enlis.basejava.storage.ArrayStorage;
 import ru.enlis.basejava.storage.SortedArrayStorage;
+import ru.enlis.basejava.storage.Storage;
 
 /**
  * Test for your ru.enlis.basejava.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
-    private static final SortedArrayStorage SORTED_ARRAY_STORAGE = new SortedArrayStorage();
+    private static final Storage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage SORTED_ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();

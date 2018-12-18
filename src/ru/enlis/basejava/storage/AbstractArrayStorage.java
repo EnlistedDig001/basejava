@@ -27,15 +27,12 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public void save(Resume resume) {
-        if (size == 0) {
-            storage[0] = resume;
-            size++;
-        } else if (size == MAX_SIZE) {
+        if (size == MAX_SIZE) {
             System.out.println("Хранилище резюме заполнено.");
         } else if (indexInStorage(resume.getUuid()) >= 0) {
             System.out.println("Резюме " + resume.getUuid() + " уже существует.");
         } else {
-            saveInOrder(resume);
+            saveInOrder(resume, indexInStorage(resume.getUuid()));
             size++;
         }
     }
@@ -53,7 +50,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uuid) {
         int indexInStorage = indexInStorage(uuid);
         if (indexInStorage > -1) {
-            deleteSavingOrder(uuid, indexInStorage);
+            deleteSavingOrder(indexInStorage);
             size--;
         } else {
             System.out.println("Резюме " + uuid + " нет.");
@@ -61,9 +58,7 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public Resume[] getAll() {
-        Resume[] storageCopy = new Resume[size];
-        System.arraycopy(storage, 0, storageCopy, 0, size);
-        return storageCopy;
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     public int size() {
@@ -72,7 +67,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract int indexInStorage(String uuid);
 
-    protected abstract void saveInOrder(Resume resume);
+    protected abstract void saveInOrder(Resume resume, int indexInStorage);
 
-    protected abstract void deleteSavingOrder(String uuid, int indexInStorage);
+    protected abstract void deleteSavingOrder(int indexInStorage);
 }

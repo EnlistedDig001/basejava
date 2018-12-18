@@ -9,25 +9,15 @@ import java.util.Arrays;
  */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-    protected void saveInOrder(Resume resume) {
-        int i = 0;
-        while ((i < size) && (Integer.parseInt(resume.getUuid()) > Integer.parseInt(storage[i].getUuid()))) {
-            i++;
-        }
+    protected void saveInOrder(Resume resume, int index) {
+        index = -(index) - 1;
 
-        for (int j = size; j > i; j--) {
-            storage[j] = storage[--j];
-            j++;
-        }
-
-        storage[i] = resume;
+        System.arraycopy(storage, index, storage, ++index, size - (--index));
+        storage[index] = resume;
     }
 
-    protected void deleteSavingOrder(String uuid, int indexInStorage) {
-        for (int i = indexInStorage; i < size; i++) {
-            storage[i] = storage[++i];
-            i--;
-        }
+    protected void deleteSavingOrder(int index) {
+        System.arraycopy(storage, ++index, storage, --index, size - (--index));
     }
 
     protected int indexInStorage(String uuid) {

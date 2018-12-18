@@ -7,13 +7,12 @@ import ru.enlis.basejava.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    protected void saveInOrder(Resume resume) {
+    protected void saveInOrder(Resume resume, int index) {
         storage[size] = resume;
     }
 
-    protected void deleteSavingOrder(String uuid, int indexInStorage) {
-        storage[indexInStorage] = null;
-        storage[indexInStorage] = storage[size - 1];
+    protected void deleteSavingOrder(int index) {
+        storage[index] = storage[size - 1];
         storage[size - 1] = null;
     }
 
