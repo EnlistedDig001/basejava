@@ -27,12 +27,13 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public void save(Resume resume) {
+        int index = indexInStorage(resume.getUuid());
         if (size == MAX_SIZE) {
             System.out.println("Хранилище резюме заполнено.");
-        } else if (indexInStorage(resume.getUuid()) >= 0) {
+        } else if (index >= 0) {
             System.out.println("Резюме " + resume.getUuid() + " уже существует.");
         } else {
-            saveInOrder(resume, indexInStorage(resume.getUuid()));
+            saveInOrder(resume, index);
             size++;
         }
     }

@@ -10,14 +10,14 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     protected void saveInOrder(Resume resume, int index) {
-        index = -(index) - 1;
+        int reversedIndex = -(index) - 1;
 
-        System.arraycopy(storage, index, storage, ++index, size - (--index));
-        storage[index] = resume;
+        System.arraycopy(storage, reversedIndex, storage, reversedIndex + 1, size - (reversedIndex - 1));
+        storage[reversedIndex] = resume;
     }
 
     protected void deleteSavingOrder(int index) {
-        System.arraycopy(storage, ++index, storage, --index, size - (--index));
+        System.arraycopy(storage, index + 1, storage, index, size - (index));
     }
 
     protected int indexInStorage(String uuid) {
