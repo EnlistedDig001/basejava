@@ -17,7 +17,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     protected void deleteSavingOrder(int index) {
-        System.arraycopy(storage, index + 1, storage, index, size - (index));
+        System.arraycopy(storage, index + 1, storage, index, size - (index - 1));
     }
 
     protected int indexInStorage(String uuid) {
