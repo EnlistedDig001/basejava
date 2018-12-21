@@ -12,12 +12,12 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     protected void saveInOrder(Resume resume, int index) {
         int reversedIndex = -(index) - 1;
 
-        System.arraycopy(storage, reversedIndex, storage, reversedIndex + 1, size - (reversedIndex - 1));
+        System.arraycopy(storage, reversedIndex, storage, reversedIndex + 1, size - reversedIndex);
         storage[reversedIndex] = resume;
     }
 
     protected void deleteSavingOrder(int index) {
-        System.arraycopy(storage, index + 1, storage, index, size - (index - 1));
+        System.arraycopy(storage, index + 1, storage, index, size - index);
     }
 
     protected int indexInStorage(String uuid) {
