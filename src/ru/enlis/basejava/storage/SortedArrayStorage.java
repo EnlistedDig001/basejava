@@ -17,9 +17,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     protected void deleteSavingOrder(int index) {
-        System.arraycopy(storage, index + 1, storage, index, size - index - 1);
         if (size == MAX_SIZE) {
+            System.arraycopy(storage, index + 1, storage, index, size - index - 1);
             storage[size - 1] = null;
+        } else {
+            System.arraycopy(storage, index + 1, storage, index, size - index);
         }
     }
 
